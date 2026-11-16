@@ -1,0 +1,85 @@
+<!-- ============================================================
+  G&H – قسم الفريق + الفيديوهات (جاهز بالبيانات)
+  1) ارفع المجلدين images/ و videos/ من gh-media إلى جذر المستودع (repo) في GitHub
+  2) الصق هذا الملف كاملاً في index.html قبل قسم "تواصل معنا"
+  3) في القائمة العلوية أضف: <a href="#team">فريقنا</a> <a href="#videos">فيديوهات</a>
+============================================================ -->
+<style>
+.gh-sec{padding:60px 5%;direction:rtl;font-family:inherit}
+.gh-sec h2{margin:0 0 6px;font-size:clamp(22px,4vw,34px);color:#0b2e6b;text-align:center}
+.gh-sec .gh-sub{text-align:center;color:#5b6b85;margin:0 0 32px}
+.gh-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;max-width:1100px;margin:0 auto}
+.gh-card{background:#fff;border:1px solid #dbe5f5;border-radius:16px;padding:22px 16px;text-align:center;box-shadow:0 4px 14px rgba(19,70,168,.07)}
+.gh-ph{width:120px;height:120px;border-radius:50%;margin:0 auto 14px;object-fit:cover;display:block;border:3px solid #d4af37}
+.gh-card h3{margin:0 0 4px;font-size:18px;color:#0b2e6b}
+.gh-card .gh-en{color:#7a8aa5;font-size:13px;direction:ltr;margin-bottom:8px}
+.gh-card .gh-role{display:inline-block;background:#eaf1ff;color:#1346a8;border-radius:20px;padding:4px 14px;font-size:14px}
+.gh-card .gh-ct{margin-top:10px;font-size:13px;direction:ltr}
+.gh-card .gh-ct a{color:#1346a8;text-decoration:none}
+.gh-tabs{display:flex;gap:8px;justify-content:center;margin-bottom:22px;flex-wrap:wrap}
+.gh-tabs button{border:1px solid #1346a8;background:#fff;color:#1346a8;border-radius:20px;padding:7px 18px;cursor:pointer;font:inherit}
+.gh-tabs button.on{background:#1346a8;color:#fff}
+#gh-videos{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.gh-vid{background:#fff;border:1px solid #dbe5f5;border-radius:16px;overflow:hidden;box-shadow:0 4px 14px rgba(19,70,168,.07)}
+.gh-vid video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;background:#0b1630}
+.gh-vid .gh-in{padding:10px 12px}
+.gh-vid h3{margin:0 0 3px;font-size:15px;color:#0b2e6b}
+.gh-vid small{color:#5b6b85}
+</style>
+
+<section class="gh-sec" id="team">
+  <h2>فريق العمل</h2>
+  <p class="gh-sub">Our Team</p>
+  <div class="gh-grid" id="gh-team"></div>
+</section>
+
+<section class="gh-sec" id="videos" style="background:#f4f7fd">
+  <h2>زياراتنا ومشاريعنا ومنتجاتنا</h2>
+  <p class="gh-sub">Visits, Projects &amp; Products</p>
+  <div class="gh-tabs" id="gh-tabs">
+    <button class="on" data-f="all">الكل</button>
+    <button data-f="visit">زيارات ومعارض</button>
+    <button data-f="project">مشاريع وشحن</button>
+    <button data-f="product">منتجات</button>
+  </div>
+  <div class="gh-grid" id="gh-videos"></div>
+</section>
+
+<script>
+/* ============ عدّل هنا فقط ============ */
+var TEAM = [
+  {name:"غيث نجيب", en:"Gaith Najeeb", role:"الرئيس التنفيذي", photo:"images/gaith-najeeb.jpg", wa:"8618257840414", phone:"+86 182 5784 0414"},
+  {name:"أحمد حسب الرسول", en:"Ahmed Hasab Elrasoul", role:"المدير العام", photo:"images/ahmed-hasab.jpg", wa:"8618676561563", phone:"+86 186 7656 1563"},
+  {name:"أحمد مرسي عوض", en:"Ahmed Mursi Awad", role:"مساعد المدير", photo:"images/ahmed-mursi.jpg", wa:"8615011911624", phone:"+86 150 1191 1624"},
+  {name:"عوض محمد", en:"Awad Mohamed", role:"المدير المالي", photo:"images/awad-mohamed.jpg", tel:"008618957949622", phone:"+86 189 5794 9622"},
+  {name:"محمد بسامة", en:"Mohamed Bsama", role:"مدير المبيعات", photo:"images/mohamed-bsama.jpg", wa:"8613588677285", phone:"+86 135 8867 7285"}
+];
+/* type: visit = زيارة/معرض ، project = مشروع/شحن ، product = منتج */
+var VIDEOS = [
+  {title:"سوفا قابلة للضغط", type:"product", desc:"Compress Sofa", id:"v01"},
+  {title:"توقيع شراكة استراتيجية", type:"project", desc:"اجتماع في المكتب", id:"v02"},
+  {title:"زيارة معرض في فوشان", type:"visit", desc:"زيارة مشترين", id:"v03"},
+  {title:"معرض كانتون 2026", type:"visit", desc:"المرحلة 3", id:"v04"},
+  {title:"زيارة مصنع ماكينات التعبئة", type:"visit", desc:"زجاجات وبلاستيك", id:"v05"},
+  {title:"مكتب الشركة", type:"visit", desc:"G&H فوشان", id:"v06"},
+  {title:"تحميل حاوية", type:"project", desc:"شحن إلى العميل", id:"v07"},
+  {title:"أدوات صحية فاخرة", type:"product", desc:"Sanitary Ware", id:"v08"},
+  {title:"نوافذ عازلة للصوت", type:"product", desc:"Soundproof Windows", id:"v09"},
+  {title:"من الطلب إلى التنفيذ", type:"project", desc:"تصميم وتجهيز الطلب", id:"v10"},
+  {title:"معدات حدائق", type:"product", desc:"Zero-turn Mower", id:"v11"},
+  {title:"أبواب خشبية", type:"product", desc:"Wooden Door", id:"v12"}
+];
+/* ====================================== */
+(function(){
+  function e(s){return String(s||"").replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  document.getElementById("gh-team").innerHTML=TEAM.map(function(p){
+    var l=p.wa?"https://wa.me/"+e(p.wa):"tel:"+e(p.tel);
+    return '<div class="gh-card"><img class="gh-ph" src="'+e(p.photo)+'" alt="'+e(p.en)+'" loading="lazy"><h3>'+e(p.name)+'</h3><div class="gh-en">'+e(p.en)+'</div><span class="gh-role">'+e(p.role)+'</span><div class="gh-ct"><a href="'+l+'" target="_blank" rel="noopener">'+e(p.phone)+'</a></div></div>';
+  }).join("");
+  var T={visit:"زيارة",project:"مشروع",product:"منتج"},v=document.getElementById("gh-videos");
+  function draw(f){v.innerHTML=VIDEOS.filter(function(x){return f==="all"||x.type===f}).map(function(x){
+    return '<div class="gh-vid"><video controls preload="none" playsinline poster="videos/'+e(x.id)+'.jpg" src="videos/'+e(x.id)+'.mp4"></video><div class="gh-in"><h3>'+e(x.title)+'</h3><small>'+T[x.type]+(x.desc?" · "+e(x.desc):"")+'</small></div></div>'}).join("")}
+  draw("all");
+  document.getElementById("gh-tabs").onclick=function(ev){var b=ev.target.closest("button");if(!b)return;[].forEach.call(this.children,function(c){c.classList.remove("on")});b.classList.add("on");draw(b.dataset.f)};
+})();
+</script>
